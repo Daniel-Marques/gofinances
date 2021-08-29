@@ -53,5 +53,3 @@ export const Footer = styled.View`
   width: 100%;
   padding: 24px;
 `;
-
-export const ButtonText = styled.Text``;
