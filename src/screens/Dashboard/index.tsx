@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import { HighlightCard } from "../../components/HighlightCard";
+import { HighlightCard } from '../../components/HighlightCard';
 import {
   TransactionCard,
   TransactionCardProps,
-} from "../../components/TransactionCard";
+} from '../../components/TransactionCard';
 
 import {
   Container,
@@ -20,7 +20,8 @@ import {
   Transactions,
   Title,
   TransactionList,
-} from "./styles";
+  LogoutButton,
+} from './styles';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -30,36 +31,36 @@ export function Dashboard() {
   const data: DataListProps[] = [
     {
       id: '1',
-      type: "positive",
-      title: "Desenvolvimento de App",
-      amount: "R$ 12.400,00",
+      type: 'positive',
+      title: 'Desenvolvimento de App',
+      amount: 'R$ 12.400,00',
       category: {
-        name: "Vendas",
-        icon: "dollar-sign",
+        name: 'Vendas',
+        icon: 'dollar-sign',
       },
-      date: "12/08/2021",
+      date: '12/08/2021',
     },
     {
       id: '2',
-      type: "negative",
-      title: "Terraço 271",
-      amount: "R$ 59,49",
+      type: 'negative',
+      title: 'Terraço 271',
+      amount: 'R$ 59,49',
       category: {
-        name: "Alimentação",
-        icon: "coffee",
+        name: 'Alimentação',
+        icon: 'coffee',
       },
-      date: "21/08/2021",
+      date: '21/08/2021',
     },
     {
       id: '3',
-      type: "negative",
-      title: "Internet Fibra",
-      amount: "R$ 83,00",
+      type: 'negative',
+      title: 'Internet Fibra',
+      amount: 'R$ 83,00',
       category: {
-        name: "Casa",
-        icon: "shopping-bag",
+        name: 'Casa',
+        icon: 'shopping-bag',
       },
-      date: "25/08/2021",
+      date: '25/08/2021',
     },
   ];
 
@@ -70,7 +71,7 @@ export function Dashboard() {
           <UserInfo>
             <Photo
               source={{
-                uri: "https://avatars.githubusercontent.com/u/15041184?v=4",
+                uri: 'https://avatars.githubusercontent.com/u/15041184?v=4',
               }}
             />
 
@@ -80,7 +81,9 @@ export function Dashboard() {
             </User>
           </UserInfo>
 
-          <Icon name="power" />
+          <LogoutButton onPress={() => {}}>
+            <Icon name="power" />
+          </LogoutButton>
         </UserWrapper>
       </Header>
 
