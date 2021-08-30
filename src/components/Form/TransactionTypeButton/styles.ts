@@ -12,12 +12,8 @@ interface ContainerProps {
   type: 'up' | 'down';
 }
 
-export const Container = styled(RectButton)<ContainerProps>`
+export const Container = styled.View<ContainerProps>`
   width: 48%;
-
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 
   border-width: ${({ isActive, type }) => isActive ? 0 : 1.5}px;
   border-style: solid;
@@ -33,6 +29,12 @@ export const Container = styled(RectButton)<ContainerProps>`
   ${({ isActive, type }) => isActive && type === 'down' && css`
     background-color: ${({ theme }) => theme.colors.attention_light}
   `}
+`;
+
+export const Button = styled(RectButton)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Icon = styled(Feather) <IconsProps>`
