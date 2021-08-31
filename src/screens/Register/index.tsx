@@ -40,7 +40,7 @@ export function Register() {
   const [transactionType, setTransactionType] = useState('');
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
-  const dataKey = '#gofinances:transactions';
+  const dataKey = '@gofinances:transactions';
 
   const [category, setCategory] = useState({
     key: 'category',
