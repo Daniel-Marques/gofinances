@@ -34,6 +34,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signInWithGoogle() {
     try {
+      console.log(GOOGLE_REDIRECT_URL);
       const RESPONSE_TYPE = 'token';
       const SCOPE = encodeURI('profile email');
 
