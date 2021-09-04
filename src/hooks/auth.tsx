@@ -24,6 +24,16 @@ function AuthProvider({ children }: AuthProviderProps) {
     email: 'daniel.silva.city@gmail.com',
   };
 
+  async function signInWithGoogle() {
+    try {
+      const CLIENT_ID = '';
+      const REDIRECT_URI = '';
+      const RESPONSE_TYPE = '';
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   return (
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
