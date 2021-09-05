@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/auth';
 
 import { HighlightCard } from '../../components/HighlightCard';
 import {
@@ -65,12 +66,15 @@ interface HighlightData {
 
 export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState();
   const [data, setData] = useState<DataListProps[]>([]);
   const [highlightData, setHighlightData] = useState<HighlightData>(
     {} as HighlightData
   );
 
   const theme = useTheme();
+
+  const { signOut } = useAuth();
 
   async function loadTransaction() {
     const dataKey = '@gofinances:transactions';
@@ -122,7 +126,10 @@ export function Dashboard() {
       'negative'
     );
 
-    const totalInterval = `01 a ${lastTransactionExpensives}`;
+    const totalInterval =
+      lastTransactionExpensives === 'NaN de Invalid Date'
+        ? '-'
+        : `01 a ${lastTransactionExpensives}`;
 
     const total = entriesTotal - expensiveTotal;
 
@@ -132,14 +139,20 @@ export function Dashboard() {
           style: 'currency',
           currency: 'BRL',
         }),
-        lastTransaction: `Última entrada dia ${lastTransactionEntries}`,
+        lastTransaction:
+          lastTransactionEntries === 'NaN de Invalid Date'
+            ? 'Ainda não houve entradas'
+            : `Última entrada dia ${lastTransactionEntries}`,
       },
       expensive: {
         amount: expensiveTotal.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
         }),
-        lastTransaction: `Última entrada dia ${lastTransactionExpensives}`,
+        lastTransaction:
+          lastTransactionExpensives === 'NaN de Invalid Date'
+            ? 'Ainda não houve saídas'
+            : `Última entrada dia ${lastTransactionExpensives}`,
       },
       total: {
         amount: total.toLocaleString('pt-BR', {
@@ -153,13 +166,24 @@ export function Dashboard() {
     setIsLoading(false);
   }
 
+  async function loadUserDate() {
+    const userStorageKey = '@gofinances:user';
+    const userStorage = await AsyncStorage.getItem(userStorageKey);
+
+    const userLogged = JSON.parse(String(userStorage));
+    console.log(userLogged);
+    // setUser(userLogged);
+  }
+
   useEffect(() => {
     loadTransaction();
+    loadUserDate();
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       loadTransaction();
+      loadUserDate();
     }, [])
   );
 
@@ -186,7 +210,7 @@ export function Dashboard() {
                 </User>
               </UserInfo>
 
-              <LogoutButton onPress={() => {}}>
+              <LogoutButton onPress={signOut}>
                 <Icon name="power" />
               </LogoutButton>
             </UserWrapper>

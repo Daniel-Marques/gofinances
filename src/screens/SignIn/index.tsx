@@ -1,5 +1,9 @@
-import React from 'react';
-import { Alert, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, Alert, Platform } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { useTheme } from 'styled-components';
+
+import { SignInSocialButton } from '../../components/SignInSocialButton';
 
 import LogoSvg from '../../assets/logo.svg';
 import GoogleSvg from '../../assets/google.svg';
@@ -16,27 +20,34 @@ import {
   Footer,
   FooterWrapper,
 } from './styles';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { SignInSocialButton } from '../../components/SignInSocialButton';
 
 export function SignIn() {
   const { signInWithGoogle, signInWihtApple } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const theme = useTheme();
 
   async function handleSignInWithGoogle() {
     try {
-      await signInWithGoogle();
+      setIsLoading(true);
+      return await signInWithGoogle();
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possível conectar a conta Google');
+    } finally {
+      setIsLoading(false);
     }
   }
 
   async function handleSignInWithApple() {
     try {
-      await signInWihtApple();
+      setIsLoading(true);
+      return await signInWihtApple();
     } catch (error) {
       console.log(error);
       Alert.alert('Não foi possível conectar a conta Apple');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -74,6 +85,13 @@ export function SignIn() {
             />
           )}
         </FooterWrapper>
+
+        {isLoading && (
+          <ActivityIndicator
+            color={theme.colors.shape}
+            style={{ marginTop: 18 }}
+          />
+        )}
       </Footer>
     </Container>
   );
