@@ -66,7 +66,6 @@ interface HighlightData {
 
 export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState();
   const [data, setData] = useState<DataListProps[]>([]);
   const [highlightData, setHighlightData] = useState<HighlightData>(
     {} as HighlightData
@@ -74,7 +73,7 @@ export function Dashboard() {
 
   const theme = useTheme();
 
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   async function loadTransaction() {
     const dataKey = '@gofinances:transactions';
@@ -200,13 +199,13 @@ export function Dashboard() {
               <UserInfo>
                 <Photo
                   source={{
-                    uri: 'https://avatars.githubusercontent.com/u/15041184?v=4',
+                    uri: user.photo,
                   }}
                 />
 
                 <User>
                   <UserGretting>Olá, </UserGretting>
-                  <UserName>Daniel</UserName>
+                  <UserName>{user.name.split(' ')[0]}</UserName>
                 </User>
               </UserInfo>
 
