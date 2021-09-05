@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
-import * as AuthSession from 'expo-auth-session';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import * as Google from 'expo-google-app-auth';
 import * as AppleAuthentication from 'expo-apple-authentication';
 
@@ -17,6 +18,7 @@ interface User {
 interface IAuthContextData {
   user: User;
   signInWithGoogle(): Promise<void>;
+  signInWihtApple(): Promise<void>;
 }
 
 interface AuthorizationResponse {
@@ -37,11 +39,10 @@ function AuthProvider({ children }: AuthProviderProps) {
   async function signInWithGoogle() {
     try {
       const result = await Google.logInAsync({
-        // expo
         iosClientId:
           '371020325383-k8oio950hu5g9em30u47f02di1uvc2qr.apps.googleusercontent.com',
         androidClientId:
-          '371020325383-5pr0nv5oant4anit7r4eqnlnv0k9v3b3.apps.googleusercontent.com',
+          '371020325383-vvtgcb29mf0hefcm1q217kr81f887ati.apps.googleusercontent.com',
         scopes: ['profile', 'email'],
       });
 
@@ -53,15 +54,17 @@ function AuthProvider({ children }: AuthProviderProps) {
           photo: result.user.photoUrl!,
         };
         setUser(userLogged);
-
-        console.log(user);
+        await AsyncStorage.setItem(
+          '@gofinances:user',
+          JSON.stringify(userLogged)
+        );
       }
     } catch (error) {
       throw new Error(`${error}`);
     }
   }
 
-  async function signInWihtApp() {
+  async function signInWihtApple() {
     try {
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
@@ -71,7 +74,17 @@ function AuthProvider({ children }: AuthProviderProps) {
       });
 
       if (credential) {
-        // const userLogged;
+        const userLogged = {
+          id: String(credential.user),
+          email: credential.email!,
+          name: credential.fullName!.givenName!,
+          photo: undefined,
+        };
+        setUser(userLogged);
+        await AsyncStorage.setItem(
+          '@gofinances:user',
+          JSON.stringify(userLogged)
+        );
       }
     } catch (error) {
       throw new Error(`${error}`);
@@ -79,7 +92,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, signInWihtApple }}>
       {children}
     </AuthContext.Provider>
   );
