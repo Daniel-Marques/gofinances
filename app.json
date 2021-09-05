@@ -8,6 +8,15 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "scheme": "gofinances"
+    "scheme": "gofinances",
+    "ios": {
+      "bundleIdentifier": "host.exp.exponent"
+    },
+    "android": {
+      "package": "com.danielmarques.gofinances"
+    }
+  },
+  "ios": {
+    "bundleIdentifier": "host.exp.exponent"
   }
 }

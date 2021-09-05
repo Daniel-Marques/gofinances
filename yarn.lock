@@ -3853,12 +3853,28 @@ expect@^26.6.2:
     jest-message-util "^26.6.2"
     jest-regex-util "^26.0.0"
 
+expo-app-auth@~10.2.2:
+  version "10.2.2"
+  resolved "https://registry.yarnpkg.com/expo-app-auth/-/expo-app-auth-10.2.2.tgz#f0d76d376384da2a1c843f154f5027ffbd0219ed"
+  integrity sha512-eS0Z2zLgOR4Qa+B7MgOpBHqZFKVAU0yWVQ70euBv8Hp9fcJ+XD6s0f4xOqv07cS5b1ITWNmSD5buqCTSfvCgJw==
+  dependencies:
+    "@expo/config-plugins" "^3.0.0"
+    expo-modules-core "~0.2.0"
+    invariant "^2.2.4"
+
 expo-app-loading@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/expo-app-loading/-/expo-app-loading-1.1.2.tgz#9efcc29d373c2cd2fcddde5a04cb13875a539ac4"
   integrity sha512-JdWa9CpB4LpIYgh9WLhpr5KoMOaBob03yBcKdSw1TIDgYUtCGfRLouxadpVOtkudY1x4/NN4ZZrH7Y5nB3SdlA==
   dependencies:
     expo-splash-screen "~0.11.2"
+
+expo-apple-authentication@~3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/expo-apple-authentication/-/expo-apple-authentication-3.2.1.tgz#c35e2151163a590f91da07a450c6d0c2213cb407"
+  integrity sha512-BF98D5mszbbIVsdTEoo4AK4PaBbmpVaQ/MkseYY+kHKdiNl8BKAdlNrInnMYZZaOekPrKMJaJRaXZzrZH9CB3g==
+  dependencies:
+    "@expo/config-plugins" "^3.0.0"
 
 expo-application@~3.2.0:
   version "3.2.0"
@@ -3924,6 +3940,13 @@ expo-font@~9.2.1:
     expo-modules-core "~0.2.0"
     fontfaceobserver "^2.1.0"
 
+expo-google-app-auth@^8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/expo-google-app-auth/-/expo-google-app-auth-8.2.2.tgz#a4922cae6e3227994e12399d9c505cc4e7608c73"
+  integrity sha512-7z2/RQoF9VVyX+X4/JSrciKa6CifeNi7saHPLUg5lWVUL08ze7TdQlznP5GFlfah00ZK6KUxqhYSwS2+ZqP83w==
+  dependencies:
+    expo-app-auth "~10.2.2"
+
 expo-image-loader@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-2.2.0.tgz#b5d49ec65e576c033823050b223ef462c5ec5711"
@@ -3975,6 +3998,11 @@ expo-splash-screen@~0.11.2:
     "@expo/configure-splash-screen" "0.5.0"
     "@expo/prebuild-config" "^2.0.0"
 
+expo-status-bar@~1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.0.4.tgz#d8a4c4418b5868c1606969b12bdee85b6fa7d8a4"
+  integrity sha512-s7nc496D/Zn1NGiMJ5wu6HyIdXxbgGtmZZtbHm7rpbcmLdf28GmMSNHDx7M0t00BMhky7VAurTCUo+BJs8ugsw==
+
 expo-structured-headers@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/expo-structured-headers/-/expo-structured-headers-1.1.1.tgz#95e28ff8686a2c06fe6ad1decdbb94cc44716683"
@@ -3985,7 +4013,7 @@ expo-updates-interface@~0.2.2:
   resolved "https://registry.yarnpkg.com/expo-updates-interface/-/expo-updates-interface-0.2.2.tgz#f754ce2c562f427d87893a9d22a4cbab39e0defd"
   integrity sha512-Gvjk/6DntlPfkoRrrmbl9jzD2YtlNVa9jV9/T1+zdvg9XvO7H+BUgAQ1NYFFx/3Wdk03z+xfCYugRWk9X5nZ5A==
 
-expo-updates@~0.8.2:
+expo-updates@~0.8.1:
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/expo-updates/-/expo-updates-0.8.5.tgz#38da04bb68a222297a1d36a2cc3c2159a0b1f221"
   integrity sha512-MX4YI80oPvbjLzdo+sNvxRma8TEOxESliADHdbrJQpdILhPZTz6GLSypqDKZps68oyvYWxJqID55EBam1nFlAg==
@@ -7177,7 +7205,7 @@ react-native-web@~0.13.12:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native@0.63.4:
+react-native@~0.63.4:
   version "0.63.4"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.63.4.tgz#2210fdd404c94a5fa6b423c6de86f8e48810ec36"
   integrity sha512-I4kM8kYO2mWEYUFITMcpRulcy4/jd+j9T6PbIzR0FuMcz/xwd+JwHoLPa1HmCesvR1RDOw9o4D+OFLwuXXfmGw==

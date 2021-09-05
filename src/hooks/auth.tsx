@@ -1,5 +1,7 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import * as AuthSession from 'expo-auth-session';
+import * as Google from 'expo-google-app-auth';
+import * as AppleAuthentication from 'expo-apple-authentication';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -34,27 +36,42 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function signInWithGoogle() {
     try {
-      console.log(GOOGLE_REDIRECT_URL);
-      const RESPONSE_TYPE = 'token';
-      const SCOPE = encodeURI('profile email');
+      const result = await Google.logInAsync({
+        // expo
+        iosClientId:
+          '371020325383-k8oio950hu5g9em30u47f02di1uvc2qr.apps.googleusercontent.com',
+        androidClientId:
+          '371020325383-5pr0nv5oant4anit7r4eqnlnv0k9v3b3.apps.googleusercontent.com',
+        scopes: ['profile', 'email'],
+      });
 
-      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URL}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
+      if (result.type === 'success') {
+        const userLogged = {
+          id: String(result.user.id),
+          email: result.user.email!,
+          name: result.user.name!,
+          photo: result.user.photoUrl!,
+        };
+        setUser(userLogged);
 
-      const { type, params } = (await AuthSession.startAsync({
-        authUrl,
-      })) as AuthorizationResponse;
+        console.log(user);
+      }
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 
-      if (type === 'success') {
-        const response = await fetch(
-          `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`
-        );
-        const userInfo = await response.json();
-        setUser({
-          id: userInfo.id,
-          name: userInfo.give_name,
-          email: userInfo.email,
-          photo: userInfo.picture,
-        });
+  async function signInWihtApp() {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      if (credential) {
+        // const userLogged;
       }
     } catch (error) {
       throw new Error(`${error}`);
